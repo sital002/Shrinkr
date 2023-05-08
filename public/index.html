@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shrinkr</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div>
+                <form id="form-url">
+                    <label for="long-url">Enter a long URL</label>
+                    <input type="text" required id="long-url">
+                    <div class="short-url">
+                        <label for="short-url">Short URL</label>
+                        <input type="text">
+                    </div>
+                    <button type="submit" id = 'generate-btn'>Generate URL</button>
+                </form>
+     
+            </div>
+        </div>
+    </div>
+    <script defer>
+        let loading = false;
+        let shortUrl = "";
+        const form = document.getElementById("form-url");
+        const generateBtn = document.getElementById("generate-btn");
+        const shortURLHolder = document.querySelector(".short-url");
+        if(!shortUrl){
+            shortURLHolder.style.display = "none"
+        }
+        form.addEventListener("submit",handleSubmit);
+        async function handleSubmit(e){
+            e.preventDefault();
+        const longUrl = document.getElementById("long-url").value;
+        if(longUrl.trim() !== ""){
+            loading = true;
+            generateBtn.innerText = "Generating...";
+            shortURLHolder.style.display = "none";
+            try{
+
+                const res = await fetch("/create-url",{
+                    method:"POST",
+                headers: {
+                    "Content-Type": "application/json"
+                    },
+                    body:JSON.stringify({
+                        url:longUrl
+                    })
+                });
+            const data = await res.json();
+            console.log(data);
+            loading = false;
+            shortUrl = data.shortUrl;
+            shortURLHolder.style.display = "block"
+            document.querySelector(".short-url input").value = shortUrl;
+            navigator.clipboard.writeText(shortUrl);
+            showPopUp("URL copied to clipboard","success");
+        }
+        catch(err){
+            showPopUp(err.message,"error")
+        }
+        generateBtn.innerText = "Generate URL";
+        }
+        }
+        function showPopUp(message,status){
+            const container = document.querySelector(".container");
+            const popUpBox = document.createElement("div");
+            popUpBox.classList.add("pop-up");
+            if(status === "success"){
+                popUpBox.style.backgroundColor = "green";
+            }
+            else if(status === "error"){
+                popUpBox.style.backgroundColor = "red";
+            }
+            popUpBox.innerText = message;
+            container.appendChild(popUpBox);
+        }
+    </script>
+</body>
+</html>
