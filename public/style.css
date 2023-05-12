@@ -35,6 +35,28 @@ input{
     outline: none;
 }
 
+.short-url-holder{
+    position: relative;
+}
+#short-url{
+    height: 50px;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid #999;
+    outline: none;
+}
+.fav-icon{
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    cursor: pointer;
+    color: #1f8244;
+}
+
 button{
     height: 50px;
     padding: 10px;
