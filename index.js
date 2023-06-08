@@ -73,7 +73,7 @@ app.get("/:id",async(req,res)=>{
 
 
 app.get("/",(req,res)=>{
-    res.send("Server is working")
+    res.send("Server is working at ",PORT)
 })
 
 app.listen(PORT,()=>{
