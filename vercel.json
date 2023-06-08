@@ -8,8 +8,15 @@
     ],
     "routes": [
         {
-            "src": "/(.*)",
-            "dest": "/"
+          "src": "/:id",
+          "dest": "/index.js",
+          "methods": ["GET"]
+        },
+        {
+          "src": "/create-url",
+          "dest": "/index.js",
+          "methods": ["POST"]
         }
-    ]
+      ]
+    
 }
