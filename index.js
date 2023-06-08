@@ -2,16 +2,16 @@ const express = require("express");
 const ShortUniqueId = require("short-unique-id");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv")
+const URL = require("./model/URLModel")
 const app = express();
 
 
-const URL = require("./model/URLModel")
+dotenv.config();
 
 const PORT = process.env.PORT || 8000;
 
 
 
-dotenv.config();
 
 
 app.use(express.json())
