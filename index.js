@@ -73,9 +73,9 @@ app.get("/:id",async(req,res)=>{
 
 
 app.get("/",(req,res)=>{
-    res.send("Server is working at ",PORT)
+    res.send("Server is working at "+PORT)
 })
 
 app.listen(PORT,()=>{
-    console.log("Server is running at ",PORT);
+    console.log("Server is running at " +PORT);
 })
