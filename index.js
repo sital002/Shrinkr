@@ -25,7 +25,7 @@ app.use(express.static("./public"))
 mongoose.connect(process.env.DB_URL).then(()=>{
     console.log("Database connected")
 }).catch((err)=>{
-    console.log(err)
+    console.error(err);
 })
 
 
@@ -72,9 +72,6 @@ app.get("/:id",async(req,res)=>{
 })
 
 
-app.get("/",(req,res)=>{
-    res.send("Server is working at "+PORT)
-})
 
 app.listen(PORT,()=>{
     console.log("Server is running at " +PORT);

@@ -48,6 +48,7 @@
         const longUrl = document.getElementById("long-url").value;
         if(longUrl.trim() !== ""){
             loading = true;
+            if(longUrl.includes("https://") || longUrl.includes("http://")){            
             generateBtn.innerText = "Generating...";
             shortURLHolder.style.display = "none";
             try{
@@ -70,11 +71,17 @@
             navigator.clipboard.writeText(shortUrl);
             showPopUp("URL copied to clipboard","success");
         }
+    
         catch(err){
             showPopUp(err.message,"error")
         }
         generateBtn.innerText = "Generate URL";
         }
+        else{
+            showPopUp("Include the full URL with https or http","error")
+            // return console.log(longUrl) ;
+        }
+    }
         }
         function showPopUp(message,status){
             const container = document.querySelector(".container");
